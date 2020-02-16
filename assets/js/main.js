@@ -10,6 +10,10 @@ let FACE_SIZE = {
 
 class Face{
     constructor(){
+        this.mid_point = {
+            x_loc: 0,
+            y_loc: 0,
+        }
         this.max_width = window.innerWidth;
         this.max_height = window.innerHeight;
         this.visible = false;
@@ -33,6 +37,8 @@ class Face{
         this.location.top_left_y = this.y_var;
         this.location.bottom_right_x = this.x_var + FACE_SIZE.width;
         this.location.bottom_right_y = this.y_var + FACE_SIZE.height;
+        this.mid_point.x_loc = this.x_var + FACE_SIZE.width/2;
+        this.mid_point.y_loc = this.y_var + FACE_SIZE.height/2;
     }
 
     checkLocationFace(x_loc, y_loc){
@@ -79,6 +85,14 @@ face.printLocationOfFace();
 
         // Use event.pageX / event.pageY here
         face.checkLocationFace(event.pageX, event.pageY);
-        window.console.log("(" + event.pageX + ", " + event.pageY + ")");
+        // window.console.log("(" + event.pageX + ", " + event.pageY + ")");
+        document.getElementById("x_axis").innerHTML="x: " + event.pageX;
+
+        document.getElementById("y_axis").innerHTML="y: " + event.pageY;
     }
 })();
+
+
+var context = new (window.AudioContext || window.webkitAudioContext)();
+
+
