@@ -34,7 +34,6 @@ class Face{
         this.location.top_left_x = this.x_var;
         this.location.top_left_y = this.y_var;
         this.location.bottom_right_x = this.x_var + FACE_SIZE.width;
-        this.location.bottom_right_y = this.y_var + FACE_SIZE.height;
         this.mid_point.x_loc = this.x_var + FACE_SIZE.width/2 + 10;
         this.mid_point.y_loc = this.y_var + FACE_SIZE.height/2 + 10;
     }
@@ -54,6 +53,26 @@ class Face{
         face_asset.style.marginTop = this.y_var + 'px';
     }
     
+    setBackgroundColor(x_location, y_location){
+        var rgb_value = {
+            r:0,
+            g:0,
+            b:255,
+        }
+
+        var dist = Math.sqrt(Math.pow(this.mid_point.x_loc - x_location, 2) + Math.pow(this.mid_point.y_loc - y_location, 2))
+
+        rgb_value.b = rgb_value.b - dist;
+        rgb_value.r = rgb_value.r + dist;
+
+
+        // set background color
+        var rgb_str = "rgb(" + rgb_value.r + "," + rgb_value.g + "," + rgb_value.b + ")";
+        
+        //document.body.style.backgroundColor = rgb_str;
+        document.getElementById("debug_color").style.backgroundColor = rgb_str;
+    }
+
     dump(){
         document.getElementById("face_size").innerHTML="w: " + FACE_SIZE.width + ", l: " + FACE_SIZE.height;
         document.getElementById("face_loc").innerHTML="FACE_MDPT: (" + this.mid_point.x_loc + ", " + this.mid_point.y_loc + ")";
@@ -91,10 +110,8 @@ face.dump();
 
         // Use event.pageX / event.pageY here
         face.checkLocationFace(event.pageX, event.pageY);
-
         document.getElementById("mouse_loc").innerHTML="MOUSE: (" + event.pageX + ", " + event.pageY + ")";
-
-        // document.body.style.backgroundColor = "red";
+        face.setBackgroundColor(event.pageX, event.pageY);
     }
 })();
 

@@ -3,10 +3,16 @@ body {
 }
 
 #face_asset {
-    width: 250px;
     position: absolute;
+    width: 250px;
 }
 
 #debug_box {
     position: absolute;
+}
+#debug_color {
+    display: block;
+    width: 150px;
+    height: 150px;
+    background-color: red;
 }
