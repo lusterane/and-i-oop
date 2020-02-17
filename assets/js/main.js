@@ -4,7 +4,7 @@ var width = window.getComputedStyle(face_asset).width;
 var height= window.getComputedStyle(face_asset).height;
 let FACE_SIZE = {
     width: parseInt(width.substr(0, width.length-2)),
-    height: parseInt(height.substring(0, height.length-2)),
+    height: parseInt(height.substring(0, height.length-2))
 };
 
 
@@ -25,26 +25,27 @@ class Face{
             bottom_right_y: 0,
         };
     }
-
-    printLocationOfFace(){
-        window.console.log("FACE: (" + this.x_var + ", " + this.y_var + ")");
-    }
     
     calculateLocation(){
         this.x_var = parseInt(Math.random() * (this.max_width-FACE_SIZE.width - 20));
         this.y_var = parseInt(Math.random() * (this.max_height-FACE_SIZE.height - 20));
+        document.getElementById("x_var").innerHTML=this.x_var;
+        document.getElementById("y_var").innerHTML=this.y_var;
         this.location.top_left_x = this.x_var;
         this.location.top_left_y = this.y_var;
         this.location.bottom_right_x = this.x_var + FACE_SIZE.width;
         this.location.bottom_right_y = this.y_var + FACE_SIZE.height;
-        this.mid_point.x_loc = this.x_var + FACE_SIZE.width/2;
-        this.mid_point.y_loc = this.y_var + FACE_SIZE.height/2;
+        this.mid_point.x_loc = this.x_var + FACE_SIZE.width/2 + 10;
+        this.mid_point.y_loc = this.y_var + FACE_SIZE.height/2 + 10;
     }
 
     checkLocationFace(x_loc, y_loc){
         if(x_loc <= this.location.bottom_right_x && x_loc >= this.location.top_left_x
             && y_loc <= this.location.bottom_right_y && y_loc >= this.location.top_left_y){
-                window.console.log("found");
+                document.getElementById("found").innerHTML="FOUND: T";
+            }
+            else{
+                document.getElementById("found").innerHTML="FOUND: F";
             }
     }
 
@@ -52,12 +53,17 @@ class Face{
         face_asset.style.marginLeft = this.x_var + 'px';
         face_asset.style.marginTop = this.y_var + 'px';
     }
+    
+    dump(){
+        document.getElementById("face_size").innerHTML="w: " + FACE_SIZE.width + ", l: " + FACE_SIZE.height;
+        document.getElementById("face_loc").innerHTML="FACE_MDPT: (" + this.mid_point.x_loc + ", " + this.mid_point.y_loc + ")";
+    }
 }
 
 let face = new Face();
 face.calculateLocation();
 face.setFaceLocation();
-face.printLocationOfFace();
+face.dump();
 
 
 (function() {
@@ -85,14 +91,11 @@ face.printLocationOfFace();
 
         // Use event.pageX / event.pageY here
         face.checkLocationFace(event.pageX, event.pageY);
-        // window.console.log("(" + event.pageX + ", " + event.pageY + ")");
-        document.getElementById("x_axis").innerHTML="x: " + event.pageX;
 
-        document.getElementById("y_axis").innerHTML="y: " + event.pageY;
+        document.getElementById("mouse_loc").innerHTML="MOUSE: (" + event.pageX + ", " + event.pageY + ")";
+
+        // document.body.style.backgroundColor = "red";
     }
 })();
-
-
-var context = new (window.AudioContext || window.webkitAudioContext)();
 
 
