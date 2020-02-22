@@ -1,6 +1,6 @@
 var CONFIG = {
-    faceWidth: "200",
-    debugMode: false,
+    faceWidth: "100",
+    debugMode: true,
 }
 if(!CONFIG.debugMode){
     document.getElementById("debug_box").style.display="none";
@@ -59,7 +59,7 @@ class Face{
             toggle_gradient: false,
         }
 
-        this.visible = false;
+        this.visible = CONFIG.debugMode;
     }
 
     // set face on screen
