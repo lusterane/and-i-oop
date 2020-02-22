@@ -19,6 +19,12 @@ class Screen {
     constructor() {
         this.window_width = window.innerWidth;
         this.window_height = window.innerHeight;
+        this.diagonal_length = 0;
+        this.calculateDiagonalLength();
+    }
+
+    calculateDiagonalLength(){
+        this.diagonal_length = Math.sqrt(Math.pow(this.window_width, 2), Math.pow(this.window_height, 2));
     }
 }
 
@@ -71,8 +77,12 @@ class Face{
             g:0,
             b:255,
         }
-        var calculated_dist = Math.sqrt(Math.pow(this.mid_point.x_loc - x_coor, 2) + Math.pow(this.mid_point.y_loc - y_coor, 2));
-        
+        var dist_to_face = Math.sqrt(Math.pow(this.mid_point.x_loc - x_coor, 2) + Math.pow(this.mid_point.y_loc - y_coor, 2));
+        var scaled_dist_to_face = dist_to_face/screen.diagonal_length;
+
+        // scale value of blue
+        rgb_value.b = scaled_dist_to_face * 255;
+        rgb_value.r = Math.abs(255-rgb_value.b);
 
 
         // set background color
