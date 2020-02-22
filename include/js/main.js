@@ -44,10 +44,24 @@ class Face{
             bottom_right_x: 0,
             bottom_right_y: 0,
         };
+        this.rgb_value = {
+            r:0,
+            g:0,
+            b:255,
+        }
+        this.gradient = {
+            gradient_degree: 0,
+            toggle_gradient: false,
+        }
+
+        this.visible = false;
     }
 
     // set face on screen
     displayFace(){
+        if(!this.visible){
+            face_asset.style.opacity = 0;
+        }
         this.location.top_left_x = parseInt(Math.random() * (screen.window_width-FACE_SIZE.width - 20));
         this.location.top_left_y = parseInt(Math.random() * (screen.window_height-FACE_SIZE.height - 20));
         this.location.bottom_right_x = this.location.top_left_x + FACE_SIZE.width;
@@ -65,6 +79,7 @@ class Face{
         if(x_coor <= this.location.bottom_right_x && x_coor >= this.location.top_left_x
             && y_coor <= this.location.bottom_right_y && y_coor >= this.location.top_left_y){
                 document.getElementById("found").innerHTML="FOUND: T";
+
             }
             else{
                 document.getElementById("found").innerHTML="FOUND: F";
@@ -72,26 +87,45 @@ class Face{
     }
     
     setBackgroundColor(x_coor, y_coor){
-        let rgb_value = {
-            r:0,
-            g:0,
-            b:255,
-        }
         var dist_to_face = Math.sqrt(Math.pow(this.mid_point.x_loc - x_coor, 2) + Math.pow(this.mid_point.y_loc - y_coor, 2));
         var scaled_dist_to_face = dist_to_face/screen.diagonal_length;
 
         // scale value of blue
-        rgb_value.b = scaled_dist_to_face * 255;
-        rgb_value.r = Math.abs(255-rgb_value.b);
+        this.rgb_value.b = scaled_dist_to_face * 255;
+        this.rgb_value.r = Math.abs(255-this.rgb_value.b);
 
 
         // set background color
-        var rgb_str = "rgb(" + rgb_value.r + "," + rgb_value.g + "," + rgb_value.b + ")";
-        //document.body.style.backgroundColor = rgb_str;
-        document.getElementById("debug_color").style.backgroundColor = rgb_str;
-        document.getElementById("rgb").innerHTML = "RGB: (" + rgb_value.r + ", " + rgb_value.g + ", " + rgb_value.b + ")";
-    }
+        var rgb_str = "rgb(" + this.rgb_value.r + "," + this.rgb_value.g + "," + this.rgb_value.b + ")";
+        var pair_rgb_str = "";
 
+        if(this.rgb_value.r>this.rgb_value.b){
+            // warm
+            pair_rgb_str = "rgb(" + this.rgb_value.r + "," + this.rgb_value.r + "," + 0 + ")";
+        }
+        else{
+            // cold
+            pair_rgb_str = "rgb(" + this.rgb_value.r + "," + this.rgb_value.b + "," + this.rgb_value.b + ")";
+        }
+
+        this.setGradientDegree();
+
+        document.body.style.backgroundImage = "linear-gradient(" + this.gradient.gradient_degree + "deg," + pair_rgb_str + ", " + rgb_str + ")";
+        document.getElementById("debug_color").style.backgroundColor = rgb_str;
+        document.getElementById("rgb").innerHTML = "RGB: (" + this.rgb_value.r + ", " + this.rgb_value.g + ", " + this.rgb_value.b + ")";
+    }
+    setGradientDegree(){
+        if(this.gradient.gradient_degree == 360 || this.gradient.gradient_degree == -360){
+            this.gradient.gradient_degree = 0;
+            this.toggle_gradient = !this.toggle_gradient;
+        }
+        if(this.toggle_gradient){
+            this.gradient.gradient_degree += .5;
+        }
+        else{
+            this.gradient.gradient_degree -= .5;
+        }
+    }
     // display info in debug
     dump(){
         document.getElementById("face_size").innerHTML="w: " + FACE_SIZE.width + ", l: " + FACE_SIZE.height;
