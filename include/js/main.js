@@ -1,6 +1,11 @@
 var CONFIG = {
     faceWidth: "200",
+    debugMode: false,
 }
+if(!CONFIG.debugMode){
+    document.getElementById("debug_box").style.display="none";
+}
+
 
 var face_asset = document.getElementById("face_asset");
 face_asset.width = CONFIG.faceWidth;
