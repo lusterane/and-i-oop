@@ -1,6 +1,6 @@
 var CONFIG = {
     faceWidth: "100",
-    debugMode: true,
+    debugMode: false,
 }
 if(!CONFIG.debugMode){
     document.getElementById("debug_box").style.display="none";
@@ -59,14 +59,18 @@ class Face{
             toggle_gradient: false,
         }
 
-        this.visible = CONFIG.debugMode;
+        this.setVisible(CONFIG.debugMode);
     }
-
-    // set face on screen
-    displayFace(){
-        if(!this.visible){
+    setVisible(isVisible){
+        if(isVisible){
+            face_asset.style.opacity = 1;
+        }
+        else{
             face_asset.style.opacity = 0;
         }
+    }
+    // set face on screen
+    displayFace(){
         this.location.top_left_x = parseInt(Math.random() * (screen.window_width-FACE_SIZE.width - 20));
         this.location.top_left_y = parseInt(Math.random() * (screen.window_height-FACE_SIZE.height - 20));
         this.location.bottom_right_x = this.location.top_left_x + FACE_SIZE.width;
@@ -80,6 +84,7 @@ class Face{
     }
 
     // checks if face is found
+    // ** maybe
     checkFaceFound(x_coor, y_coor){
         if(x_coor <= this.location.bottom_right_x && x_coor >= this.location.top_left_x
             && y_coor <= this.location.bottom_right_y && y_coor >= this.location.top_left_y){
@@ -173,5 +178,13 @@ face.dump();
         face.setBackgroundColor(event.pageX, event.pageY);
     }
 })();
+
+
+function foundFace()
+{
+    //document.getElementById("face_asset").style.width="1000px";
+    face.setVisible(true);
+    document.getElementById("temp_oop_message").innerText="u won, n1 m8";
+}
 
 
