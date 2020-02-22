@@ -4,15 +4,15 @@ body {
 
 #face_asset {
     position: absolute;
-    width: 250px;
 }
 
 #debug_box {
     position: absolute;
 }
+
 #debug_color {
     display: block;
     width: 150px;
     height: 150px;
-    background-color: red;
+    background-color: blue;
 }
