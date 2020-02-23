@@ -1,6 +1,7 @@
 #background {
     position: absolute;
     background-image: linear-gradient(45deg, rgb(44, 0, 211), rgb(44, 211, 211));
+    z-index: -999;
     width: 100%;
     height: 100%;
 }
@@ -44,8 +45,8 @@
 
 #face_asset {
     animation: shake 0.5s;
-    animation-iteration-count: infinite;
-  }
+animation-iteration-count: infinite;
+}
   
   @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -59,4 +60,21 @@
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+  #info_text {
+      margin: 1em;
+  }
+
+  #info_button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 3em;
+    cursor: pointer;
+    filter: invert(100%) opacity(50%);
+  }
+  
+  #info_button:hover{
+    filter: invert(70%) opacity(100%);
   }
