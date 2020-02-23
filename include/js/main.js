@@ -157,7 +157,7 @@ class Face{
             pair_rgb_str = "rgb(" + this.rgb_value.r + "," + this.rgb_value.b + "," + this.rgb_value.b + ")";
         }
 
-        document.body.style.backgroundImage = "linear-gradient(45deg,"+ rgb_str + "," + pair_rgb_str + ")";
+        document.getElementById("background").style.backgroundImage = "linear-gradient(45deg,"+ rgb_str + "," + pair_rgb_str + ")";
         document.getElementById("debug_color").style.backgroundColor = rgb_str;
         document.getElementById("rgb").innerHTML = "RGB: (" + this.rgb_value.r + ", " + this.rgb_value.g + ", " + this.rgb_value.b + ")";
     }
