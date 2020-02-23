@@ -103,3 +103,13 @@
 #info_ok_btn {
     border: none;
 }
+
+#footer {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+#footer:hover {
+    animation: shake 0.5s;
+	animation-iteration-count: infinite;
+}
