@@ -25,11 +25,22 @@ class Screen {
         this.window_width = window.innerWidth;
         this.window_height = window.innerHeight;
         this.diagonal_length = 0;
-        this.calculateDiagonalLength();
+        this.screen_midpoint = {
+            x_loc: 0,
+            y_loc: 0,
+        };
+        this.init();
     }
-
+    init(){
+        this.calculateDiagonalLength();
+        this.calculateMidpoint();
+    }
     calculateDiagonalLength(){
         this.diagonal_length = Math.sqrt(Math.pow(this.window_width, 2), Math.pow(this.window_height, 2));
+    }
+    calculateMidpoint(){
+        this.screen_midpoint.x_loc = (this.window_width/2)-FACE_SIZE.width+30;
+        this.screen_midpoint.y_loc = (this.window_height/2)-FACE_SIZE.height+20;
     }
 }
 
@@ -54,19 +65,19 @@ class Face{
             g:0,
             b:255,
         }
-        this.gradient = {
-            gradient_degree: 0,
-            toggle_gradient: false,
-        }
-
-        this.setVisible(CONFIG.debugMode);
+        this.face_clicked = false;
+        this.init();
     }
-    setVisible(isVisible){
+    init(){
+        this.setVisible(CONFIG.debugMode, "face_asset");
+        this.setVisible(CONFIG.debugMode, "win_message");
+    }
+    setVisible(isVisible, element){
         if(isVisible){
-            face_asset.style.opacity = 1;
+            $("#"+element).css("opacity", 1);
         }
         else{
-            face_asset.style.opacity = 0;
+            $("#"+element).css("opacity", 0);
         }
     }
     // set face on screen
@@ -85,6 +96,7 @@ class Face{
 
     // checks if face is found
     // ** maybe
+    /*
     checkFaceFound(x_coor, y_coor){
         if(x_coor <= this.location.bottom_right_x && x_coor >= this.location.top_left_x
             && y_coor <= this.location.bottom_right_y && y_coor >= this.location.top_left_y){
@@ -94,7 +106,7 @@ class Face{
             else{
                 document.getElementById("found").innerHTML="FOUND: F";
             }
-    }
+    }*/
     
     setBackgroundColor(x_coor, y_coor){
         var dist_to_face = Math.sqrt(Math.pow(this.mid_point.x_loc - x_coor, 2) + Math.pow(this.mid_point.y_loc - y_coor, 2));
@@ -118,33 +130,37 @@ class Face{
             pair_rgb_str = "rgb(" + this.rgb_value.r + "," + this.rgb_value.b + "," + this.rgb_value.b + ")";
         }
 
-        this.setGradientDegree();
-
-        document.body.style.backgroundImage = "linear-gradient(" + this.gradient.gradient_degree + "deg," + pair_rgb_str + ", " + rgb_str + ")";
+        document.body.style.backgroundImage = "linear-gradient(45deg,"+ rgb_str + "," + pair_rgb_str + ")";
         document.getElementById("debug_color").style.backgroundColor = rgb_str;
         document.getElementById("rgb").innerHTML = "RGB: (" + this.rgb_value.r + ", " + this.rgb_value.g + ", " + this.rgb_value.b + ")";
     }
-    setGradientDegree(){
-        if(this.gradient.gradient_degree == 360 || this.gradient.gradient_degree == -360){
-            this.gradient.gradient_degree = 0;
-            this.toggle_gradient = !this.toggle_gradient;
-        }
-        if(this.toggle_gradient){
-            this.gradient.gradient_degree += .5;
-        }
-        else{
-            this.gradient.gradient_degree -= .5;
-        }
-    }
+
     // display info in debug
     dump(){
         document.getElementById("face_size").innerHTML="w: " + FACE_SIZE.width + ", l: " + FACE_SIZE.height;
         document.getElementById("face_loc").innerHTML="FACE_MDPT: (" + this.mid_point.x_loc + ", " + this.mid_point.y_loc + ")";
     }
+    
+    foundFace()
+    {
+        if(!this.face_clicked){
+            this.face_clicked = true;
+            this.setVisible(true, "face_asset");
+            this.moveFace(1000);
+        }
+
+    }
+
+    moveFace(duration){
+        $("#face_asset").animate({
+            marginLeft: screen.screen_midpoint.x_loc-100,
+            marginTop: screen.screen_midpoint.y_loc-100,
+            width: "+=200",
+        }, duration);
+    }
 }
 
 let face = new Face();
-face.checkFaceFound();
 face.displayFace();
 face.dump();
 
@@ -173,18 +189,9 @@ face.dump();
         }
 
         // Use event.pageX / event.pageY here
-        face.checkFaceFound(event.pageX, event.pageY);
+        //face.checkFaceFound(event.pageX, event.pageY);
         document.getElementById("mouse_loc").innerHTML="MOUSE: (" + event.pageX + ", " + event.pageY + ")";
         face.setBackgroundColor(event.pageX, event.pageY);
     }
 })();
-
-
-function foundFace()
-{
-    //document.getElementById("face_asset").style.width="1000px";
-    face.setVisible(true);
-    document.getElementById("temp_oop_message").innerText="u won, n1 m8";
-}
-
 
