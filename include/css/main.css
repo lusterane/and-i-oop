@@ -32,12 +32,11 @@
 	background-color: purple;
 }
 
-#smile-face-text {
-	position: absolute;
+#emoji-text {
+    position: absolute;
 	top: 50%;
 	left: 50%;
-	/* bring your own prefixes */
-	transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 	font-size: 35px;
 	color: white;
 	user-select: none;
@@ -99,4 +98,8 @@
 
 #info_button:hover {
 	filter: invert(70%) opacity(100%);
+}
+
+#info_ok_btn {
+    border: none;
 }

@@ -11,7 +11,6 @@
 			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 			crossorigin="anonymous"
 		/>
-
 		<!-- <script src="https://kit.fontawesome.com/d8f861c16b.js" crossorigin="anonymous"></script> -->
 
 		<title>And I Oop</title>
@@ -28,14 +27,14 @@
 		/>
 		<!-- Modal -->
 		<div
-			class="modal fade"
+			class="modal fade bd-example-modal-sm"
 			id="info_modal"
 			tabindex="1"
 			role="dialog"
 			aria-labelledby="infoModalLabel"
 			aria-hidden="true"
 		>
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="information_modal_label">And I Oop</h5>
@@ -43,14 +42,16 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="info_modal_body">
+					<div class="modal_body">
 						<div id="info_text">
 							<p>Try to find the oop.</p>
-							<p>Warmer you are, the closer it is.</p>
+							<p>
+								The answers lie where it is warm.
+							</p>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">
+						<button type="button" id="info_ok_btn" class="btn btn-primary" data-dismiss="modal">
 							Ok
 						</button>
 					</div>
@@ -78,7 +79,7 @@
 		</div>
 
 		<!-- Screen assets -->
-		<div id="smile-face-text">🥵🥵🥵</div>
+		<div id="emoji-text">🥵🥵🥵</div>
 		<div id="face_asset_container">
 			<img
 				id="face_asset"

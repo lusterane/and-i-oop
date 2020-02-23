@@ -1,3 +1,6 @@
+$('#tooltip_cold').tooltip('enable');
+$('#tooltip_warm').tooltip('enable');
+
 var CONFIG = {
 	faceWidth: "100",
 	debugMode: false
@@ -179,7 +182,9 @@ class Face {
 			"linear-gradient(45deg," + rgb_str + "," + pair_rgb_str + ")";
 		document.getElementById("debug_color").style.backgroundColor = rgb_str;
 		document.getElementById("rgb").innerHTML =
-			"RGB: (" + this.rgb_value.r + ", " + this.rgb_value.g + ", " + this.rgb_value.b + ")";
+            "RGB: (" + this.rgb_value.r + ", " + this.rgb_value.g + ", " + this.rgb_value.b + ")";
+        document.getElementById("info_ok_btn").style.backgroundImage =
+        "linear-gradient(45deg," + rgb_str + "," + pair_rgb_str + ")";
 	}
 
 	// display info in debug
@@ -225,7 +230,7 @@ class Face {
 			}
 		}
 
-		$("#smile-face-text").text(emoji);
+		$("#emoji-text").text(emoji);
 	}
 
 	updateEmojiIndicator(x_coor, y_coor) {
