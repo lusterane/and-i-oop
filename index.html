@@ -1,74 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" type="text/css" href="./include/css/main.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
-        <!-- <script src="https://kit.fontawesome.com/d8f861c16b.js" crossorigin="anonymous"></script> -->
-        
-        <title>And I Oop</title>
-    </head>
-    <body>
-        <div id="background"></div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" type="text/css" href="./include/css/main.css" />
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
 
-        <!-- Button trigger modal -->
-        <img src="include/img/info_icon.svg" id="info_button" data-toggle="modal" data-target="#info_modal">
-        <!-- Modal -->
-        <div class="modal fade" id="info_modal" tabindex="1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="information_modal_label">And I Oop</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="info_modal_body">
-                    <div id="info_text">
-                        <p>Try to find the oop.</p>
-                        <p> Warmer you are, the closer it is.</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-            </div>
-        </div>
+		<!-- <script src="https://kit.fontawesome.com/d8f861c16b.js" crossorigin="anonymous"></script> -->
 
-        <!-- Debug -->
-        <div id="debug_box">
-            <b>DEBUG</b>
-            <br>
-            <span id="mouse_loc">-</span>
-            <br>
-            <span id="found">-</span>
-            <br>
-            <span id="face_loc">-</span>
-            <br>
-            <span id="rgb">-</span>
-            <br>
-            <u>VARIABLES</u>
-            <br>
-            FACE_SIZE: 
-            <span id="face_size">-</span>
-            <div id="debug_color"></div>
-        </div>
+		<title>And I Oop</title>
+	</head>
+	<body>
+		<div id="background"></div>
 
-        <!-- Screen assets -->
-        <div id="smile-face-text">🥵🥵🥵</div>
-        <div id="face_asset_container">
-            <img id="face_asset" class="face_asset" onclick="face.foundFace()" src="./include/img/face.png">
-        </div>
-    </body>
-    
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
-    <script type="text/javascript" src="./include/js/jquery/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./include/js/main.js"></script>
-    
-    </html>
+		<!-- Button trigger modal -->
+		<img
+			src="include/img/info_icon.svg"
+			id="info_button"
+			data-toggle="modal"
+			data-target="#info_modal"
+		/>
+		<!-- Modal -->
+		<div
+			class="modal fade"
+			id="info_modal"
+			tabindex="1"
+			role="dialog"
+			aria-labelledby="infoModalLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="information_modal_label">And I Oop</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="info_modal_body">
+						<div id="info_text">
+							<p>Try to find the oop.</p>
+							<p>Warmer you are, the closer it is.</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">
+							Ok
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Debug -->
+		<div id="debug_box">
+			<b>DEBUG</b>
+			<br />
+			<span id="mouse_loc">-</span>
+			<br />
+			<span id="found">-</span>
+			<br />
+			<span id="face_loc">-</span>
+			<br />
+			<span id="rgb">-</span>
+			<br />
+			<u>VARIABLES</u>
+			<br />
+			FACE_SIZE:
+			<span id="face_size">-</span>
+			<div id="debug_color"></div>
+		</div>
+
+		<!-- Screen assets -->
+		<div id="smile-face-text">🥵🥵🥵</div>
+		<div id="face_asset_container">
+			<img
+				id="face_asset"
+				class="face_asset"
+				onclick="face.foundFace()"
+				src="./include/img/face.png"
+			/>
+		</div>
+	</body>
+
+	<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+	<script type="text/javascript" src="./include/js/jquery/jquery-3.4.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"
+	></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"
+	></script>
+	<script type="text/javascript" src="./include/js/main.js"></script>
+</html>
