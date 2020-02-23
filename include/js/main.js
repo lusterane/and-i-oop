@@ -8,7 +8,7 @@ window.mobilecheck = function() {
 };
 
 $( document ).ready(function() {
-    if(window.mobilecheck){
+    if(!window.mobilecheck){
         $('#mobile-warning').css('display', 'block');
     }
 });
