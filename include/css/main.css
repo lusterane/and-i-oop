@@ -28,6 +28,17 @@ body {
     background-color: purple;
 }
 
+#smile-face-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+    color: white;
+    user-select: none;
+}
+
 #face_asset {
     animation: shake 0.5s;
     animation-iteration-count: infinite;

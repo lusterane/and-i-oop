@@ -24,7 +24,7 @@ class Screen {
     constructor() {
         this.window_width = window.innerWidth;
         this.window_height = window.innerHeight;
-        this.diagonal_length = 0;
+        this.max_distance = 0;
         this.screen_midpoint = {
             x_loc: 0,
             y_loc: 0,
@@ -32,12 +32,10 @@ class Screen {
         this.init();
     }
     init(){
-        this.calculateDiagonalLength();
         this.calculateMidpoint();
     }
-    calculateDiagonalLength(){
-        this.diagonal_length = Math.sqrt(Math.pow(this.window_width, 2), Math.pow(this.window_height, 2));
-    }
+    
+    // only for midpoint of screen
     calculateMidpoint(){
         this.screen_midpoint.x_loc = (this.window_width/2)-FACE_SIZE.width+30;
         this.screen_midpoint.y_loc = (this.window_height/2)-FACE_SIZE.height+20;
@@ -65,12 +63,17 @@ class Face{
             g:0,
             b:255,
         }
+
+        this.max_distance = -1;
         this.face_clicked = false;
         this.init();
     }
     init(){
         this.setVisible(CONFIG.debugMode, "face_asset");
         this.setVisible(CONFIG.debugMode, "win_message");
+        this.displayFace();
+        this.calculateMaxDistance();
+        this.dump();
     }
     setVisible(isVisible, element){
         if(isVisible){
@@ -80,6 +83,31 @@ class Face{
             $("#"+element).css("opacity", 0);
         }
     }
+
+    // calculates max distance from face possible
+    calculateMaxDistance(){
+        var corner_arrs = [
+        { // left_top_corner
+            x: 0,
+            y: 0
+        },
+        { // left_bottom_corner
+            x: 0,
+            y: screen.window_height
+        },
+        { // right_top_corner
+            x: screen.window_width,
+            y: 0
+        },
+        { // right_bottom_corner
+            x: screen.window_width,
+            y: screen.window_height
+        }]
+        for(let i = 0; i < corner_arrs.length; i++){
+            this.max_distance = Math.max(calculateDistance(corner_arrs[i].x, corner_arrs[i].y, this.mid_point.x_loc, this.mid_point.y_loc), this.max_distance);
+        }
+    }
+    
     // set face on screen
     displayFace(){
         this.location.top_left_x = parseInt(Math.random() * (screen.window_width-FACE_SIZE.width - 20));
@@ -108,10 +136,9 @@ class Face{
             }
     }*/
     
-    setBackgroundColor(x_coor, y_coor){
-        var dist_to_face = Math.sqrt(Math.pow(this.mid_point.x_loc - x_coor, 2) + Math.pow(this.mid_point.y_loc - y_coor, 2));
-        var scaled_dist_to_face = dist_to_face/screen.diagonal_length;
-
+    updateBackgroundColor(x_coor, y_coor){
+        var dist_to_face = calculateDistance(this.mid_point.x_loc, this.mid_point.y_loc, x_coor, y_coor);
+        var scaled_dist_to_face = dist_to_face/this.max_distance;
         // scale value of blue
         this.rgb_value.b = scaled_dist_to_face * 255;
         this.rgb_value.r = Math.abs(255-this.rgb_value.b);
@@ -158,11 +185,58 @@ class Face{
             width: "+=200",
         }, duration);
     }
+
+    // emoji
+    // lit 🥵
+    // hot 🔥
+    // cold ❄️
+    changeEmoji(type, level){
+        let emoji = "";
+        for(let i = 0; i < level; i++){
+            if(type == "lit"){
+                emoji += "🥵";
+            }
+            else if(type == "hot"){
+                emoji += "🔥";
+            }
+            else if(type == "cold"){
+                emoji += "❄️";
+            }
+        }
+
+        $('#smile-face-text').text(emoji);
+    }
+
+    updateEmojiIndicator(x_coor, y_coor){
+        var dist_to_face = calculateDistance(this.mid_point.x_loc, this.mid_point.y_loc, x_coor, y_coor);
+        var scaled_distance = (dist_to_face/this.max_distance)*100;
+        
+        if(scaled_distance > 94){
+            this.changeEmoji("cold", 3);
+        }
+        else if(scaled_distance > 80){
+            this.changeEmoji("cold", 2);
+        }
+        else if(scaled_distance > 64){
+            this.changeEmoji("cold", 1);
+        }
+        else if(scaled_distance > 48){
+            this.changeEmoji("hot", 1);
+        }
+        else if(scaled_distance > 20){
+            this.changeEmoji("hot", 2);
+        }
+        else if(scaled_distance > 15){
+            this.changeEmoji("hot", 3);
+        }
+        else if(scaled_distance > 0){
+            this.changeEmoji("lit", 3);
+        }
+    }
 }
 
 let face = new Face();
-face.displayFace();
-face.dump();
+
 
 
 (function() {
@@ -191,7 +265,12 @@ face.dump();
         // Use event.pageX / event.pageY here
         //face.checkFaceFound(event.pageX, event.pageY);
         document.getElementById("mouse_loc").innerHTML="MOUSE: (" + event.pageX + ", " + event.pageY + ")";
-        face.setBackgroundColor(event.pageX, event.pageY);
+        face.updateBackgroundColor(event.pageX, event.pageY);
+        face.updateEmojiIndicator(event.pageX, event.pageY);
     }
 })();
+
+function calculateDistance(x1, y1, x2, y2){
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+}
 
