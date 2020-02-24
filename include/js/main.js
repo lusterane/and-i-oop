@@ -79,7 +79,6 @@ class Face {
 	}
 	init() {
 		this.setVisible(CONFIG.debugMode, "face_asset");
-		this.setVisible(CONFIG.debugMode, "win_message");
 		this.displayFace();
 		this.calculateMaxDistance();
 		this.dump();
@@ -192,6 +191,8 @@ class Face {
 		document.getElementById("rgb").innerHTML =
             "RGB: (" + this.rgb_value.r + ", " + this.rgb_value.g + ", " + this.rgb_value.b + ")";
         document.getElementById("info_ok_btn").style.backgroundImage =
+		"linear-gradient(45deg," + rgb_str + "," + pair_rgb_str + ")";
+		document.getElementById("btn_refresh").style.backgroundImage =
         "linear-gradient(45deg," + rgb_str + "," + pair_rgb_str + ")";
 	}
 
@@ -205,11 +206,17 @@ class Face {
 	}
 
     // win condition
-	foundFace() {
+	onWin() {
 		if (!this.face_clicked) {
 			this.face_clicked = true;
 			this.setVisible(true, "face_asset");
 			this.moveFace(1000);
+			setTimeout(() => {
+				$('#win_modal').modal('show')	
+			}, 1500);
+		}
+		else{
+			$('#win_modal').modal('show')
 		}
 	}
 
@@ -308,4 +315,8 @@ let face = new Face();
 
 function calculateDistance(x1, y1, x2, y2) {
 	return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+}
+
+function refresh(){
+	location.reload();
 }

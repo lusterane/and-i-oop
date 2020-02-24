@@ -13,9 +13,11 @@
 }
 
 #win_message {
-	display: none;
 	position: absolute;
-	font-size: 100px;
+	top: 70%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+	font-size: 50px;
 	color: white;
 }
 
@@ -103,7 +105,7 @@
 }
 
 #info_button:hover {
-	filter: invert(70%) opacity(100%);
+	filter: invert(30%) opacity(100%);
 }
 
 #info_ok_btn {
@@ -115,9 +117,24 @@
     left: 10px;
     bottom: 10px;
     color: white;
-    filter: opacity(50%);
+    filter: opacity(80%);
 }
+
 #footer:hover {
     animation: shake 0.5s;
 	animation-iteration-count: infinite;
+}
+
+#win_btn {
+	position: absolute;
+	right: 10px;
+}
+
+#btn_refresh {
+	width: 100%;
+	border: none;
+}
+
+.modal-dialog {
+	width: 350px !important;
 }

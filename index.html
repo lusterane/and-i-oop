@@ -18,6 +18,32 @@
 	<body>
 		<div id="background"></div>
 
+		<!-- Mobile Warning -->
+		<div id="mobile-warning">Play with a mouse for the best experience</div>
+		
+		<!-- Debug -->
+		<div id="debug_box">
+			<b>DEBUG</b>
+			<br />
+			<span id="mouse_loc">-</span>
+			<br />
+			<span id="found">-</span>
+			<br />
+			<span id="face_mdpt">-</span>
+			<br />
+			<span id="face_loc">-</span>
+			<br />
+			<span id="rgb">-</span>
+			<br />
+			<u>VARIABLES</u>
+			<br />
+			FACE_SIZE:
+			<span id="face_size">-</span>
+			<div id="debug_color"></div>
+		</div>
+
+		<!-- Screen assets -->
+
 		<!-- Button trigger modal -->
 		<img
 			src="include/img/info_icon.svg"
@@ -51,51 +77,58 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" id="info_ok_btn" class="btn btn-primary" data-dismiss="modal">
+						<button
+							type="button"
+							id="info_ok_btn"
+							class="btn btn-primary"
+							data-dismiss="modal"
+						>
 							Ok
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-        <!-- Mobile Warning -->
-        <div id="mobile-warning">Play with a mouse for the best experience</div>
-		<!-- Debug -->
-		<div id="debug_box">
-			<b>DEBUG</b>
-			<br />
-			<span id="mouse_loc">-</span>
-			<br />
-			<span id="found">-</span>
-			<br />
-			<span id="face_mdpt">-</span>
-            <br />
-            <span id="face_loc">-</span>
-            <br />
-			<span id="rgb">-</span>
-            <br />
-			<u>VARIABLES</u>
-			<br />
-			FACE_SIZE:
-			<span id="face_size">-</span>
-			<div id="debug_color"></div>
-		</div>
-
-		<!-- Screen assets -->
 		<div id="emoji-text">❄️❄️❄️</div>
-		<div id="face_asset_container">
-			<img
-				id="face_asset"
-				class="face_asset"
-				onclick="face.foundFace()"
-				src="./include/img/face.png"
-			/>
-        </div>
-        
-        <!-- Footer -->
-        <div id="footer">
-            Made by <a href="https://github.com/lusterane" target="_blank">Tobs</a>
-        </div>
+		<img
+			id="face_asset"
+			class="face_asset"
+			onclick="face.onWin()"
+			src="./include/img/face.png"
+		/>
+
+		<!-- Win Condition -->
+
+		<!-- Modal -->
+		<div
+			class="modal fade"
+			id="win_modal"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="win_modal_title">And I OOP</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						And I Oop
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="btn_refresh" onclick="refresh()" >Oop Again</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<div id="footer">
+			Made by <a href="https://github.com/lusterane" target="_blank">Tobs</a>
+		</div>
 	</body>
 
 	<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
@@ -109,9 +142,9 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"
-    ></script>
-    <script src="./include/js/mobile-detect.js"></script>
-    <script type="text/javascript" src="./include/js/main.js"></script>
+	></script>
+	<script src="./include/js/mobile-detect.js"></script>
+	<script type="text/javascript" src="./include/js/main.js"></script>
 
-    <script src="./include/js/mobile-detect.js"></script>
+	<script src="./include/js/mobile-detect.js"></script>
 </html>
