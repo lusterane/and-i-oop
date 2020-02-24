@@ -114,6 +114,8 @@
     position: absolute;
     left: 10px;
     bottom: 10px;
+    color: white;
+    filter: opacity(50%);
 }
 #footer:hover {
     animation: shake 0.5s;
